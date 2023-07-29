@@ -7,6 +7,5 @@ import org.springframework.boot.runApplication
 class JujuMarketApplication
 
 fun main(args: Array<String>) {
-
-	runApplication<JujuMarketApplication>(*args)
+    runApplication<JujuMarketApplication>(*args)
 }
