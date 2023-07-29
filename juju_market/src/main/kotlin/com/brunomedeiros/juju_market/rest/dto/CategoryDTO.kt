@@ -2,7 +2,7 @@ package com.brunomedeiros.juju_market.rest.dto
 
 import com.brunomedeiros.juju_market.domain.entity.Category
 
-class CategoryDTO(
+data class CategoryDTO(
 		val id: Long,
 		val categoryName: String
 ) {
