@@ -2,8 +2,9 @@ package com.brunomedeiros.juju_market.rest.dto
 
 import com.brunomedeiros.juju_market.domain.entity.Category
 
-data class CategoryDTO(
+data class CategoryResponseDTO(
+		val id: Long?,
 		val categoryName: String
 ) {
-	fun toEntity(): Category = Category(categoryName = categoryName)
+	constructor(category: Category) : this(category.id, category.categoryName)
 }

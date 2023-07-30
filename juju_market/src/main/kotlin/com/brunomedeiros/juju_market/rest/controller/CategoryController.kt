@@ -1,23 +1,23 @@
 package com.brunomedeiros.juju_market.rest.controller
 
-import com.brunomedeiros.juju_market.domain.entity.Category
 import com.brunomedeiros.juju_market.rest.dto.CategoryDTO
-import com.brunomedeiros.juju_market.service.impl.CategoryService
+import com.brunomedeiros.juju_market.rest.dto.CategoryResponseDTO
+import com.brunomedeiros.juju_market.service.ICategoryService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(value = ["/api/v1/category"])
-class CategoryController(private val categoryService: CategoryService) {
+class CategoryController(private val categoryService: ICategoryService) {
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	fun getAllCategories(): List<CategoryDTO> = categoryService.findAllCategories().map { category -> CategoryDTO(category) }
+	fun getAllCategories(): List<CategoryResponseDTO> = categoryService.findAllCategories().map { CategoryResponseDTO(it) }
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	fun save(@RequestBody @Valid category: Category): CategoryDTO = CategoryDTO(categoryService.save(category))
+	fun save(@RequestBody @Valid categoryDTO: CategoryDTO): CategoryResponseDTO = CategoryResponseDTO(categoryService.save(categoryDTO))
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
