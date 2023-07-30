@@ -1,15 +1,14 @@
 package com.brunomedeiros.juju_market.rest.controller
 
-import com.brunomedeiros.juju_market.domain.entity.Product
 import com.brunomedeiros.juju_market.rest.dto.ProductDTO
-import com.brunomedeiros.juju_market.service.impl.ProductService
+import com.brunomedeiros.juju_market.service.IProductService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(value = ["/api/v1/product"])
-class ProductController(private val productService: ProductService) {
+class ProductController(private val productService: IProductService) {
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
@@ -25,13 +24,13 @@ class ProductController(private val productService: ProductService) {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	fun saveProduct(@RequestBody @Valid product: Product): ProductDTO = productService.saveProduct(product).run {
+	fun saveProduct(@RequestBody @Valid productDTO: ProductDTO): ProductDTO = productService.saveProduct(productDTO).run {
 		ProductDTO(id, productName, measurementUnit, unitPrice, category)
 	}
 
-	@PutMapping
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	fun updateProduct(@RequestBody productDTO: ProductDTO): ProductDTO = productService.updateProduct(productDTO).run {
+	fun updateProduct(@PathVariable id: Long, @RequestBody productDTO: ProductDTO): ProductDTO = productService.updateProduct(id, productDTO).run {
 		ProductDTO(id, productName, measurementUnit, unitPrice, category)
 	}
 

@@ -9,15 +9,17 @@ import org.springframework.stereotype.Service
 
 @Service
 class ProductService(private val productRepository: ProductRepository) : IProductService {
-	override fun saveProduct(product: Product): Product = productRepository.save(product)
+	override fun saveProduct(productDTO: ProductDTO): Product = productRepository.save(productDTO.toEntity())
 
-	override fun findAllProducts(): List<Product> = productRepository.findAll()
+	override fun findAllProducts(): List<Product> = productRepository.findAll().ifEmpty {
+		throw NotFoundException("Not found products.")
+	}
 
 	override fun findProductById(id: Long): Product = productRepository.findById(id)
 			.orElseThrow { NotFoundException("Product not found.") }
 
-	override fun updateProduct(productDTO: ProductDTO): Product = findProductById(productDTO.id).let {
-		saveProduct(Product(productDTO.id,
+	override fun updateProduct(id: Long, productDTO: ProductDTO): Product = findProductById(id).let {
+		saveProduct(ProductDTO(id,
 				productDTO.productName ?: it.productName,
 				productDTO.measurementUnit ?: it.measurementUnit,
 				productDTO.unitPrice ?: it.unitPrice,
