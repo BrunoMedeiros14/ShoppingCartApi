@@ -23,4 +23,9 @@ class ControllerAdivice {
 	fun handleMethodArgumentNotValidException(ex: MethodArgumentNotValidException): ApiErrors =
 			ApiErrors(ex.bindingResult.allErrors.map { it.defaultMessage })
 
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(IllegalArgumentException::class)
+	fun handleIllegalArgumentException(ex: IllegalArgumentException): ApiErrors =
+			ApiErrors(ex.message)
+
 }

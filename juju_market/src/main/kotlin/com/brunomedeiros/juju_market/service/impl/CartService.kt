@@ -20,12 +20,18 @@ class CartService(private val cartRepository: CartRepository, private val paymen
 	override fun findCartById(id: Long): Cart = cartRepository.findById(id)
 			.orElseThrow { NotFoundException("Cart not found.") }
 
+	override fun findValidCartById(id: Long): Cart = findCartById(id).let {
+		if (it.paymentStatus == PaymentStatusEnum.FINISHED)
+			throw IllegalArgumentException("cart already finished.", Throwable())
+		it
+	}
+
 	override fun findAllCarts(): List<Cart> = cartRepository.findAll()
 			.ifEmpty { throw NotFoundException("Not found carts.") }
 
 	override fun deleteCartById(id: Long): Unit = cartRepository.deleteById(id)
 
-	override fun cartPay(id: Long, paymentMethod: PaymentMethodEnum): Cart = findCartById(id).run {
+	override fun cartPay(id: Long, paymentMethod: PaymentMethodEnum): Cart = findValidCartById(id).run {
 		paymentStatus = PaymentStatusEnum.FINISHED
 		payment = createPayment(this, paymentMethod)
 		cartRepository.save(this)

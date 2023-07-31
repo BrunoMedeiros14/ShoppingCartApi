@@ -36,7 +36,7 @@ class ProductCartService(private val productCartRepository: ProductCartRepositor
 			.findByProductIdAndCartId(productCartDTO.productId, productCartDTO.cartId)
 
 	private fun createProductCart(productCartDTO: ProductCartDTO): ProductCart = productCartDTO.run {
-		val cart: Cart = cartService.findCartById(cartId)
+		val cart: Cart = cartService.findValidCartById(cartId)
 		val product: Product = productService.findProductById(productId)
 		productCartRepository.save(ProductCart(null, product, 0, product.unitPrice, cart))
 	}

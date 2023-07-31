@@ -13,4 +13,5 @@ interface ICartService {
 	fun deleteCartById(id: Long): Unit
 
 	fun cartPay(id: Long, paymentMethod: PaymentMethodEnum): Cart
+	fun findValidCartById(id: Long): Cart
 }

@@ -2,6 +2,7 @@ package com.brunomedeiros.juju_market.rest.controller
 
 import com.brunomedeiros.juju_market.domain.enums.PaymentMethodEnum
 import com.brunomedeiros.juju_market.rest.dto.CartResponseDTO
+import com.brunomedeiros.juju_market.rest.dto.PaymentResponseDTO
 import com.brunomedeiros.juju_market.service.ICartService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -28,5 +29,6 @@ class CartController(private val cartService: ICartService) {
 
 	@PostMapping("/pay")
 	@ResponseStatus(HttpStatus.OK)
-	fun payCart(@RequestParam id: Long, @RequestParam paymentMethod: PaymentMethodEnum) = cartService.cartPay(id, paymentMethod)
+	fun payCart(@RequestParam id: Long, @RequestParam paymentMethod: PaymentMethodEnum): PaymentResponseDTO =
+			PaymentResponseDTO(cartService.cartPay(id, paymentMethod))
 }

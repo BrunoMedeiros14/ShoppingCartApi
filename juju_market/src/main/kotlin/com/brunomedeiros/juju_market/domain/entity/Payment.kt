@@ -1,8 +1,8 @@
 package com.brunomedeiros.juju_market.domain.entity
 
 import com.brunomedeiros.juju_market.domain.enums.PaymentMethodEnum
+import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.persistence.*
-import org.springframework.format.annotation.DateTimeFormat
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -18,7 +18,7 @@ class Payment(
 		@Column(name = "payment_method")
 		val paymentMethod: PaymentMethodEnum? = null,
 
-		@DateTimeFormat(style = "yyyy/mm/dd")
+		@JsonFormat(pattern = "yyyy-MM-dd")
 		@Column(name = "payment_date")
 		val paymentDate: LocalDateTime,
 
