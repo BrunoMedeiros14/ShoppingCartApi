@@ -1,5 +1,6 @@
 package com.brunomedeiros.juju_market.domain.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import java.math.BigDecimal
 
@@ -23,6 +24,7 @@ class Product(
 		@JoinColumn(name = "category_id")
 		val category: Category,
 
+		@JsonIgnore
 		@OneToMany(mappedBy = "product")
 		val productsCart: List<ProductCart> = mutableListOf()
 )
