@@ -29,7 +29,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete category",
+					"name": "Delete category by id",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -82,7 +82,7 @@
 			"name": "Product",
 			"item": [
 				{
-					"name": "Get all Products",
+					"name": "Get all products",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -178,7 +178,7 @@
 					"response": []
 				},
 				{
-					"name": "Update product Copy",
+					"name": "Delete product by id",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -261,7 +261,7 @@
 					"response": []
 				},
 				{
-					"name": "Get all Carts",
+					"name": "Get all carts",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -337,7 +337,7 @@
 			"name": "Product Cart",
 			"item": [
 				{
-					"name": "Remove Product Cart",
+					"name": "Remove product cart",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -365,7 +365,7 @@
 					"response": []
 				},
 				{
-					"name": "Add Product Cart",
+					"name": "Add product cart",
 					"request": {
 						"method": "POST",
 						"header": [],

@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/v1.8,22-orange?logo=kotlin&logoColor=white&label=Docker" alt="Gradle" />
+  <img src="https://img.shields.io/badge/v1.8.22-orange?logo=kotlin&logoColor=white&label=Docker" alt="Gradle" />
   <img src="https://img.shields.io/badge/v3.1.2-green?logo=spring&logoColor=white&label=Spring-boot" alt="Spring Boot" />
   <img src="https://img.shields.io/badge/v8.1.2-blue?logo=gradle&logoColor=white&label=Gradle" alt="Gradle" />
   <img src="https://img.shields.io/badge/v20.10.24-blue?logo=docker&logoColor=white&label=Docker" alt="Gradle" />
@@ -62,6 +62,8 @@ Com esse relacionamento, foi desenvolvido vários endpoints para cada entidade, 
   - **DELETE** `/api/v1/product-cart` -> Remove produtos do carrinho conforma e quantidade e produto informado, retornando erro se não houver o produto no carrinho.
 
 Para facilitar o teste do aplicativo e [clique aqui](./assets/TQI_challenge.postman_collection.json 'Coleção de teste api no postman') para baixar a coleção de testes listada no postman.
+
+E também há o json para gerar documentação Open Api Swagger desse projeto [aqui](./assets/openapi.json 'Coleção open api').
 
 Tendo um fluxo esperado de incluir uma categoria -> incluir um produto -> criar um carrinho -> adicionar produto no carrinho -> realizar pagamento no carrinho informando seu id e o método de pagamento.
 

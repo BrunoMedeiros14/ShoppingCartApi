@@ -1,0 +1,712 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "juju_market API - OpenAPI 3.0",
+    "description": "juju_market API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api/v1"
+    }
+  ],
+  "paths": {
+    "/category": {
+      "get": {
+        "tags": [
+          "category-controller"
+        ],
+        "summary": "Get categories",
+        "description": "Retorna todas as categorias cadastradas.",
+        "operationId": "getAllCategories",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryResponseDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "category-controller"
+        ],
+        "summary": "Create category",
+        "description": "Cria uma categoria.",
+        "operationId": "save",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/category/{id}": {
+      "delete": {
+        "tags": [
+          "category-controller"
+        ],
+        "summary": "Delete category by id",
+        "description": "Deleta uma categoria pelo id.",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/product": {
+      "get": {
+        "tags": [
+          "product-controller"
+        ],
+        "summary": "Get products",
+        "description": "Retorna todos produtos cadastrados e retorna um erro se não houver produto cadastrado.",
+        "operationId": "getAllProducts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "product-controller"
+        ],
+        "summary": "Create product",
+        "description": "Cria um produto e o retorna.",
+        "operationId": "saveProduct",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/{id}": {
+      "get": {
+        "tags": [
+          "product-controller"
+        ],
+        "summary": "Get product by id",
+        "description": "Busca um produto pelo id e retorna um erro se não encontra-lo.",
+        "operationId": "getById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BAD_REQUEST",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "product-controller"
+        ],
+        "summary": "Delete product by id",
+        "description": "Deleta um produto pelo id.",
+        "operationId": "deleteProduct",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "product-controller"
+        ],
+        "summary": "Update product by id",
+        "description": "Atualiza os atributos de um produto e retorna um erro se não houver item com o id.",
+        "operationId": "updateProduct",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cart": {
+      "get": {
+        "tags": [
+          "cart-controller"
+        ],
+        "summary": "Get all carts",
+        "description": "Busca todos os carrinhos.",
+        "operationId": "getAllCarts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CartResponseDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "cart-controller"
+        ],
+        "summary": "Create cart",
+        "description": "Cria um carrinho e retorna ele.",
+        "operationId": "createCart",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cart/{id}": {
+      "get": {
+        "tags": [
+          "cart-controller"
+        ],
+        "summary": "Get cart by id",
+        "description": "Busca um carrinho pelo Id.",
+        "operationId": "findCartById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "cart-controller"
+        ],
+        "summary": "Delete cart by id",
+        "description": "Deleta o carrinho pelo id.",
+        "operationId": "deleteCartById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/cart/pay": {
+      "post": {
+        "tags": [
+          "cart-controller"
+        ],
+        "summary": "Create a payment",
+        "description": "Cria um pagamento para o carrinho.",
+        "operationId": "payCart",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "paymentMethod",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "discount",
+                "message",
+                "CREDIT_CARD",
+                "DEBIT_CARD",
+                "MONEY",
+                "PIX"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product_cart": {
+      "post": {
+        "tags": [
+          "product-cart-controller"
+        ],
+        "summary": "Create and add product",
+        "description": "Cria um novo produto para carrinho.",
+        "operationId": "addProductCart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductCartDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCartResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "product-cart-controller"
+        ],
+        "summary": "Delete product",
+        "description": "Deleta produtos do carrinho.",
+        "operationId": "removeProductCart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductCartDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCartResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProductCartDTO": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cartId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "BigDecimal": {
+        "type": "number",
+        "format": "double"
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "categoryName": {
+            "type": "string"
+          }
+        }
+      },
+      "Payment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "enum": [
+              "discount",
+              "message",
+              "CREDIT_CARD",
+              "DEBIT_CARD",
+              "MONEY",
+              "PIX"
+            ]
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "finalPrice": {
+            "$ref": "#/components/schemas/BigDecimal"
+          }
+        }
+      },
+      "Cart": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "paymentStatus": {
+            "type": "string",
+            "enum": [
+              "AWAITING",
+              "FINISHED"
+            ]
+          },
+          "productsCart": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCart"
+            }
+          },
+          "payment": {
+            "$ref": "#/components/schemas/Payment"
+          }
+        }
+      },
+      "ProductCart": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "salePrice": {
+            "$ref": "#/components/schemas/BigDecimal"
+          },
+          "cart": {
+            "$ref": "#/components/schemas/Cart"
+          }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "measurementUnit": {
+            "type": "string"
+          },
+          "unitPrice": {
+            "$ref": "#/components/schemas/BigDecimal"
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "productsCart": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCart"
+            }
+          }
+        }
+      },
+      "ProductCartResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "salePrice": {
+            "$ref": "#/components/schemas/BigDecimal"
+          },
+          "totalPrice": {
+            "$ref": "#/components/schemas/BigDecimal"
+          }
+        }
+      },
+      "ProductDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "measurementUnit": {
+            "type": "string"
+          },
+          "unitPrice": {
+            "$ref": "#/components/schemas/BigDecimal"
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          }
+        }
+      },
+      "CartResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "paymentStatus": {
+            "type": "string",
+            "enum": [
+              "AWAITING",
+              "FINISHED"
+            ]
+          },
+          "productsCart": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCartResponseDTO"
+            }
+          },
+          "totalPrice": {
+            "$ref": "#/components/schemas/BigDecimal"
+          },
+          "payment": {
+            "$ref": "#/components/schemas/Payment"
+          }
+        }
+      },
+      "PaymentResponseDTO": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "payment": {
+            "$ref": "#/components/schemas/Payment"
+          }
+        }
+      },
+      "CategoryDTO": {
+        "type": "object",
+        "properties": {
+          "categoryName": {
+            "type": "string"
+          }
+        }
+      },
+      "CategoryResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "categoryName": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
