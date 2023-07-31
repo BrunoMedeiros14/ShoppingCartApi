@@ -1,5 +1,6 @@
 package com.brunomedeiros.juju_market.rest.controller
 
+import com.brunomedeiros.juju_market.domain.enums.PaymentMethodEnum
 import com.brunomedeiros.juju_market.rest.dto.CartResponseDTO
 import com.brunomedeiros.juju_market.service.ICartService
 import org.springframework.http.HttpStatus
@@ -25,4 +26,7 @@ class CartController(private val cartService: ICartService) {
 	@ResponseStatus(HttpStatus.OK)
 	fun delete(@PathVariable id: Long) = cartService.deleteCartById(id)
 
+	@PostMapping("/pay")
+	@ResponseStatus(HttpStatus.OK)
+	fun payCart(@RequestParam id: Long, @RequestParam paymentMethod: PaymentMethodEnum) = cartService.cartPay(id, paymentMethod)
 }

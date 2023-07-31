@@ -1,6 +1,5 @@
 package com.brunomedeiros.juju_market.domain.entity
 
-import com.brunomedeiros.juju_market.domain.enums.PaymentMethodEnum
 import com.brunomedeiros.juju_market.domain.enums.PaymentStatusEnum
 import jakarta.persistence.*
 
@@ -13,12 +12,12 @@ class Cart(
 
 		@Enumerated(EnumType.STRING)
 		@Column(name = "payment_status")
-		val paymentStatus: PaymentStatusEnum = PaymentStatusEnum.AWAITING,
-
-		@Enumerated(EnumType.STRING)
-		@Column(name = "payment_method")
-		val paymentMethod: PaymentMethodEnum? = null,
+		var paymentStatus: PaymentStatusEnum = PaymentStatusEnum.AWAITING,
 
 		@OneToMany(mappedBy = "cart")
-		var productsCart: MutableList<ProductCart> = mutableListOf()
+		var productsCart: MutableList<ProductCart> = mutableListOf(),
+
+		@OneToOne(cascade = [CascadeType.ALL])
+		@JoinColumn(name = "payment_id", unique = true)
+		var payment: Payment? = null
 )
