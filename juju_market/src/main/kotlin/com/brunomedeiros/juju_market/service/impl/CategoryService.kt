@@ -15,5 +15,8 @@ class CategoryService(private val categoryRepository: CategoryRepository) : ICat
 		throw NotFoundException("Not found categories.")
 	}
 
-	override fun deleteById(id: Long) = categoryRepository.deleteById(id)
+	private fun findCategoryById(id: Long): Category = categoryRepository.findById(id)
+			.orElseThrow { NotFoundException("Category not found.") }
+
+	override fun deleteById(id: Long) = categoryRepository.delete(findCategoryById(id))
 }

@@ -16,7 +16,7 @@ class ProductCartController(private val productCartService: IProductCartService)
 	fun addProductCart(@RequestBody @Valid productCartDTO: ProductCartDTO): ProductCartResponseDTO =
 			ProductCartResponseDTO(productCartService.addProductCart(productCartDTO))
 
-	@DeleteMapping
+	@PatchMapping
 	@ResponseStatus(HttpStatus.OK)
 	fun removeProductCart(@RequestBody @Valid productCartDTO: ProductCartDTO): ProductCartResponseDTO =
 			ProductCartResponseDTO(productCartService.removeProductCart(productCartDTO))
