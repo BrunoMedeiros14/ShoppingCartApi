@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/juju_market
-    username: root
-    password: juju
+    url: jdbc:postgresql://${SQL_URL:localhost}/juju_market
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:juju}
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:

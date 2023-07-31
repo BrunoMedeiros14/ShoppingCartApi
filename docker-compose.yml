@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  postgree:
+    container_name: postgree
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=juju_market
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=juju
+
+  backend:
+    container_name: juju_market
+    build: ./juju_market
+    image: juju_market
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgree
+    restart: always
+    environment:
+      - APP_PROFILE=prod
+      - SQL_URL=postgree
+      - SQL_USERNAME=root
+      - SQL_PASSWORD=juju
