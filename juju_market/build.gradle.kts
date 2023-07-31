@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.brunomedeiros"
-version = "0.0.1-SNAPSHOT"
+version = "1.0"
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
@@ -26,10 +26,23 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
+
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("org.postgresql:postgresql")
+
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+	testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("com.h2database:h2")
+	testImplementation("io.mockk:mockk:1.13.5")
+}
+
+extensions.findByName("buildScan")?.withGroovyBuilder {
+	setProperty("termsOfServiceUrl", "https://gradle.com/terms-of-service")
+	setProperty("termsOfServiceAgree", "yes")
 }
 
 tasks.withType<KotlinCompile> {
