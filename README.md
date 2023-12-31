@@ -2,8 +2,6 @@
   Juju market
 </h1>
 
-[click here to see documentation in portuguese](./README.pt-br.md)
-
 <p align="center">
   <img src="https://img.shields.io/badge/v1.8.22-orange?logo=kotlin&logoColor=white&label=Kotlin" alt="Kotlin" />
   <img src="https://img.shields.io/badge/v3.1.2-green?logo=spring&logoColor=white&label=Spring-boot" alt="Spring Boot" />
@@ -13,6 +11,8 @@
 </p>
 
 Project carried out to complete the TQI challenge after completing the bootcamp provided on the [DIO](https://www.dio.me/ 'DIO website') platform.
+
+[click here](./README.pt-br.md) to see the documentation in Portuguese :brazil:
 
 ## Technologies
 
