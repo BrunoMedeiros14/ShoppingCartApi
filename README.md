@@ -75,6 +75,7 @@ Having an expected flow to include a category -> include a product -> create a c
 
 ```bash
 git clone https://github.com/BrunoMedeiros14/tqi_Kotlin_backend_developer_2023.git
+```
 
 - With Java 17 installed on the machine and Java Home configured, run Gradle with the command `gradlew.bat bootRun` on Windows or the command `./gradlew bootRun` on **Linux**.
 
